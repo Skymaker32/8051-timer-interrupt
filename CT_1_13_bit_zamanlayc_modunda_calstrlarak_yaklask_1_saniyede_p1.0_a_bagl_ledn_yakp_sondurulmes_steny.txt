@@ -1,0 +1,18 @@
+#include <REG8253.H>
+
+org 00h
+sjmp z
+z:
+mov p1,#00h
+mov tmod,#00h
+mov tl1,#10d
+mov th1,#70d
+setb tr1
+mov r0,#101d
+don:jnb tf1,don
+clr tf1
+djnz r0,don
+mov r0,#101d
+cpl p1.0
+sjmp don
+end

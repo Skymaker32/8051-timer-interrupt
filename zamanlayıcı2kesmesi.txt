@@ -1,0 +1,21 @@
+orh 00h
+sjmp x
+org 2bh
+sjmp kesme
+x:mov t2con,#00000000b
+mov dptr,#59279d
+mov tl2,dpl
+mov rcap2l,dpl
+mov th2,dph
+mov rcap2h,dph
+setb et2
+setb ea
+mov r0,#249d
+biti temizle
+x1:sjmp x1
+kesme:clr tf2
+djnz r0,cik
+işlemi yap
+cik:reti
+end
+--------------------------

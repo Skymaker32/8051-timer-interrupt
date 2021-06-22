@@ -1,0 +1,86 @@
+org 00h
+sjmp basla
+org 03h
+sjmp kesme1
+org 0bh
+sjmp zamanlayici0
+basla:
+mov tmod,#00001001b
+mov dptr,#veri
+mov tl0,dpl
+mov th0,dph
+setb ea
+setb ex0
+setb it0
+setb et0
+setb tr0
+x:sjmp x
+
+zamanlayici0:
+mov tl0,dpl
+mov th0,dph
+djnz r0,git
+yapılacak işlemler.
+
+kesme1:
+git:reti
+end
+----------------------
+13 bit için
+org 00h
+sjmp basla
+org 03h
+sjmp kesme1
+org 0bh
+sjmp zamanlayici0
+basla:
+mov tmod,#00001000b
+mov tl0,#veri
+mov th0,#veri
+setb ea
+setb ex0
+setb it0
+setb et0
+setb tr0
+x:sjmp x
+
+ 
+zamanlayici0:
+mov tl0,dpl
+mov th0,dph
+djnz r0,git
+yapılacak işlemler.
+
+kesme1:
+git:reti
+end
+
+---------------
+8 bit için 
+org 00h
+sjmp basla
+org 03h
+sjmp kesme1
+org 0bh
+sjmp zamanlayici0
+basla:
+mov tmod,#00001010b
+mov tl0,#veri
+mov th0,#veri
+setb tr0
+setb ea
+setb ex0
+setb it0
+setb et0
+setb tr0
+x:sjmp x
+
+
+zamanlayici0:
+
+djnz r0,git
+yapılacak işlemler.
+
+kesme1:
+git:reti
+end

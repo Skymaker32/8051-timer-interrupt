@@ -1,0 +1,71 @@
+orh 00h
+sjmp basla
+org 1bh
+sjmp sayici1
+
+basla:
+mov tmod,#01010000b;01b;
+mov dptr,#veri     ;16 bitte yaptım eğer 13 bitte yapsaydım dptr kullanmayacaktım ve sadece mov tl0,#veri,mov th0,#veri yapmalıydım.
+mov tl1,dpl
+mov th1,dph
+setb et1
+setb ea
+setb tr1
+
+x:sjmp x
+
+sayici1:
+djnz r0,git
+yapılacak işlemler.
+git:reti
+end
+----------------------
+13 bit zamanlayıcı 1 kesme yapısı kullanımı:
+
+orh 00h
+sjmp basla
+org 1bh
+sjmp sayici1
+
+basla:
+mov tmod,#01000000b
+mov tl1,#veri
+mov th1,#veri
+setb et1
+setb ea
+setb tr1
+
+x:sjmp x
+
+sayici1:
+djnz r0,git;eğer zamanlayıcı sayıcı işlemi için bir döngü gerekiyorsa buda vardır.
+yapılacak işlemler.
+git:reti
+end
+--------------------------
+8 bit zamanlayıcı 1 kesme yapısı kullanımı:
+orh 00h
+sjmp basla
+org 1bh
+sjmp sayici1
+
+basla:
+mov tmod,#01100000b
+mov tl1,#veri
+mov th1,#veri
+setb et1
+setb ea
+setb tr1
+
+x:sjmp x
+
+sayici1:
+djnz r0,git;eğer zamanlayıcı sayıcı işlemi için bir döngü gerekiyorsa buda vardır.
+yapılacak işlemler.
+git:reti
+end
+
+
+
+
+

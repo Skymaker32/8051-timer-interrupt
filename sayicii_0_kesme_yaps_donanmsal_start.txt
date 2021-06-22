@@ -1,0 +1,90 @@
+
+
+org 00h
+sjmp basla
+
+org 003h
+sjmp harici0
+org 00Bh
+sjmp sayici0
+
+basla:
+mov tmod,#00001101b;
+mov dptr,#veri     ;16 bitte yaptım eğer 13 bitte yapsaydım dptr kullanmayacaktım ve sadece mov tl0,#veri,mov th0,#veri yapmalıydım.
+mov tl0,dpl
+mov th0,dph
+setb it0
+setb et0
+setb ex0
+setb ea
+setb tr0
+
+
+
+x:sjmp x
+
+sayici0:
+mov tl0,#veri
+mov th0,#veri
+djnz r0,git;eğer zamanlayıcı sayıcı işlemi için bir döngü gerekiyorsa buda vardır.
+yapılacak işlemler.
+harici0:
+git:reti
+end
+
+13 bit zamanlayıcı sayıcı 0 kesme yapısı kullanımı:
+org 00h
+sjmp basla
+
+org 003h
+sjmp harici0
+org 00Bh
+sjmp sayici0
+
+basla:
+mov tmod,#00001100b;    
+mov tl0,#veri
+mov th0,#veri
+setb it0
+setb et0
+setb ex0
+setb ea
+setb tr0
+
+x:sjmp x
+
+sayici0:
+mov tl0,#veri
+mov th0,#veri
+djnz r0,git;eğer zamanlayıcı sayıcı işlemi için bir döngü gerekiyorsa buda vardır.
+yapılacak işlemler.
+harici0:
+git:reti
+end
+
+8bit sayici0 kesme yapısı ile kullanılırsa;
+org 00h
+sjmp basla
+
+org 003h
+sjmp harici0
+org 00Bh
+sjmp sayici0
+basla:
+mov tmod,#00001110;sayıcı modu
+mov tl0,#veri
+mov th0,#veri
+clr sorudasöylenenpin
+setb it0
+setb et0
+setb ex0
+setb ea
+setb tr0
+x:sjmp x
+sayici0:
+clr tf0
+djnz r0,git;eğer zamanlayıcı sayıcı işlemi için bir döngü gerekiyorsa buda vardır.
+yapılacak işlemler
+harici0:
+git:reti
+end

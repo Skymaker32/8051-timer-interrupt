@@ -1,0 +1,23 @@
+org 00h
+sjmp z
+z:
+mov p0,#00h
+mov tmod,#00000001b
+mov dptr,#64103d
+mov tl0,dpl
+mov th0,dph
+setb tr0
+mov a,#1d
+don:mov r0,#13d
+jnb tf0,don
+clr tf0
+mov tl0,dpl	
+mov th0,dph	
+djnz r0,don
+mov p0,a
+rl a
+clr tf0
+mov tl0,dpl	
+mov th0,dph	
+sjmp don
+end

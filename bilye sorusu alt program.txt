@@ -1,0 +1,94 @@
+#include <REG8253.H>
+
+org 00h
+sjmp basla
+org 0bh
+sjmp sayici0
+org 02bh
+sjmp zamanlayici2
+basla:
+anl p3,#0f0h
+mov 20h,p3
+mov a,#65535d
+subb a,20h
+mov tmod,#00000101b
+mov dptr,a
+mov th0,dph
+mov tl0,dpl
+mov r0,#7d
+mov t2con,00000000b
+mov dptr,#26213     //0,5/1,2us=416.667  6,36 7 döngü 65535-0,6*65536=26213
+mov tl2,dpl
+mov rcap2l,dpl
+mov th2,dph
+mov rcap2h,dph
+setb et2
+setb et0
+setb ea
+setb tr0
+x:sjmp x
+sayici0:
+clr tf0
+clr tr0
+setb tr2
+reti
+
+zamanlayici2:
+djnz r0,cik
+cpl p1.0
+cik:reti
+end
+
+
+
+
+
+
+
+
+
+
+
+
+--
+#include <REG8253.H>
+
+org 00h
+sjmp basla
+org 0bh
+sjmp sayici0
+org 02bh
+sjmp zamanlayici2
+basla:
+anl p3,#0f0h
+mov 20h,p3
+mov dptr,#65535d
+mov a,dpl
+subb a,20h
+mov dpl,a
+mov tmod,#00000101b
+mov th0,dph
+mov tl0,dpl
+mov r0,#7d
+mov t2con,00000000b
+mov dptr,#26213     //0,5/1,2us=416.667  6,36 7 döngü 65535-0,6*65536=26213
+mov tl2,dpl
+mov rcap2l,dpl
+mov th2,dph
+mov rcap2h,dph
+setb et2
+setb et0
+setb ea
+setb tr0
+x:sjmp x
+sayici0:
+clr tf0
+clr tr0
+setb tr2
+reti
+
+zamanlayici2:
+djnz r0,cik
+cpl p1.0
+cik:reti
+end

@@ -1,0 +1,37 @@
+#include <REG8253.H>
+org 00h
+	sjmp basla
+	org 2bh
+	sjmp kesme
+	basla:
+	clr 00h
+	mov t2con,#0bh
+	mov p2,#00h
+	setb et2
+	setb ea
+	setb tr2
+	bekle:sjmp bekle
+	
+	kesme: jb 00h,gec
+	setb 00h
+	clr tr2
+	mov t2con,#00h
+	mov a,#0ffh
+	subb a,rcap2l
+	mov tl2,a
+	mov rcap2l,a
+	mov a,#0ffh
+	subb a,rcap2h
+	mov th2,a
+	mov rcap2h,a
+	reti
+	gec:
+	inc p2
+	mov a,p2
+	cjne a,#100d,devam
+	clr tr2
+	clr ea
+	clr 00h
+	devam:
+	reti
+	end
